@@ -1,9 +1,7 @@
 # MIPS32 Simulator
-## Team ByteSystem
-CS19B010 - Gowtami\
-CS19B011 -Sahithi Rani
+
 ## How it works?
-> Our MIPS32 Simulator displays a graphical user interface to upload an assembly file present anywhere in your computer. It asks you to enter some values like sizes of level 1 and level 2 caches, block sizes etc. Based on the entered values, it executes the assembly instructions and displays a GUI. In the GUI, it shows the values stored in the registers in the Registers section and the values stored in the data segment in the Data Segment Section. In the Text section, it displays each instruction in the input file, its equivalent 32 bit binary form and the values of all the registers after executing that particular instruction. In the Info section, you can choose either to enable or disable data forwarding and see the total number of instructions executed, total number of clock cycles, total number of stalls, number of level 1 cache misses, number of level 2 cache misses, level 1 cache miss rate, level 2 cache miss rate and the instructions per clock cycle (IPC) for both data forwarding enabled and disabled.
+> The MIPS32 Simulator displays a graphical user interface to upload an assembly file present anywhere in your computer. It asks you to enter some values like sizes of level 1 and level 2 caches, block sizes etc. Based on the entered values, it executes the assembly instructions and displays a GUI. In the GUI, it shows the values stored in the registers in the Registers section and the values stored in the data segment in the Data Segment Section. In the Text section, it displays each instruction in the input file, its equivalent 32 bit binary form and the values of all the registers after executing that particular instruction. In the Info section, you can choose either to enable or disable data forwarding and see the total number of instructions executed, total number of clock cycles, total number of stalls, number of level 1 cache misses, number of level 2 cache misses, level 1 cache miss rate, level 2 cache miss rate and the instructions per clock cycle (IPC) for both data forwarding enabled and disabled.
 
 > *The file bubblesort.asm is an assembly file which performs bubblesort on the given data and it is written based on our architecture.*
 ## Screenshots
@@ -15,7 +13,7 @@ CS19B011 -Sahithi Rani
 </p>
 
 ## Instructions Implemented :
-Our simulator can run the following instructions:
+The simulator can run the following instructions:
 ```
 * add
 * sub
@@ -35,7 +33,7 @@ Our simulator can run the following instructions:
 The branch instructions `bne`, `beq` and the `jump` instruction(j), jump to an instruction number rather than a label.
 
 ## Classes implemented in the Java program :
-There are `9` Java classes in our program. The class GuiSimulator is the main class.
+There are `9` Java classes in the program. The class GuiSimulator is the main class.
 
 ### GUI Class :
 > The GUI class holds the code to create a graphical user interface to upload a file and display the registers and the data segment after the execution of the program.
@@ -64,18 +62,18 @@ There are `9` Java classes in our program. The class GuiSimulator is the main cl
 ### Cache Class:
 > The Cache class is used to check if the required data is present in it before going to the Memory. If the required data is present in the Cache object, we can access the data from it directly without going to the Memory. If the data is not present in it, then we fetch the data from the Memory and store it in the Cache object. Our simulator supports two levels of caches and it implements the Least Recently Used(LRU) cache replacement policy.
 ## Design Decisions
->   we have implemented a memory of size 1 kilo words or 1024 words. And the memory is word addressable. That is, we can access 4bytes at a time from the memory. The valid instructions for our simulator are add, sub, mul, slt, and, or, addi, subi, bne, beq, lw, sw and j. Here we implemented the jump instruction such that it can only jump to an instruction number specified but not to a label. We implemented the MIPS pipleline with the five stages: IF, ID/RF, Ex, M and WB. All the stages are assumed to take 1 clock cycle except for the memory stage
+>   I have implemented a memory of size 1 kilo words or 1024 words. And the memory is word addressable. That is, we can access 4bytes at a time from the memory. The valid instructions for our simulator are add, sub, mul, slt, and, or, addi, subi, bne, beq, lw, sw and j. Here we implemented the jump instruction such that it can only jump to an instruction number specified but not to a label. We implemented the MIPS pipleline with the five stages: IF, ID/RF, Ex, M and WB. All the stages are assumed to take 1 clock cycle except for the memory stage
    
 ## About Cache :
-* we have two levels for cache and has replacement policy `LRU`
-* policy used is `Non Inclusive` and `Write Back`
+* A two level Cache is implemented with the `LRU` cache replacement policy
+* The Cache is `Non Inclusive` and `Write Back` policy is implemented
 * The configuration of the cache like the cache size, block size, associativity, hit time and also the memory access time can be set by the user before starting the simulator.     The time taken to execute the memory stage is dependent on the configuration set by the user
 
 ## Stalls :
- * Coming to the stall cycles, we have implemented our simulator such that it detects all the data hazards and control hazards; and the user has an option to either enable or   disable data forwarding.
-  *  We have identified all the possible cases where stalls may arise for both data forwarding enabled and disabled and we have implemented our simulator such that it detects   the hazards and updates the stall cycles accordingly.
+ * Coming to the stall cycles, the simulator is implemented such that it detects all the data hazards and control hazards; and the user has an option to either enable or disable data forwarding.
+  *  All the possible cases where stalls may arise have been identified for both data forwarding enabled and disabled cases and the simulator is implemented such that it detects   the hazards and updates the stall cycles accordingly.
   *   The stall cycles for the memory stage are also taken care of.
-  *    According to the cache configuration and memory access time set by the user, the stall cycles will be updated for the memory stage as well.
+  *   According to the Cache configuration and memory access time set by the user, the stall cycles will be updated for the memory stage as well.
    
 ## Branch Predictor :
 * Not taken
